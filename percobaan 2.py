@@ -5,38 +5,39 @@ posisi_0 = 1
 # Program utama
 while not x == -1: #Selama x bukan -1, program akan berjalan
     n = int(input("Jumlah orang di seluruh lantai yang akan naik lift: "))
-    numpang = [0 for i in range (0, n)]
-    minta = [0 for i in range (0, n)]
-    dalam = [False for i in range (0, n)]
+    #isi list dengan 0 sebagai default
+    numpang = [0 for i in range (0, n)] #posisi awal penumpang
+    minta = [0 for i in range (0, n)] #tujuan
+    dalam = [False for i in range (0, n)] #penumapng di dalam lift atau tidak
     if not n == -1: #Selama pengguna tidak memasukkan -1, x tidak akan menjadi -1
         for i in range (0, n):
-            ok = False
+            ok = False #nanti diganti break
             while ok == False:
                 print("Masukkan posisi penumpang ke-" + str(i + 1) + " [1-10]: ", end="")
                 numpang[i] = int(input())
-                if not (numpang[i] < 0 or numpang[i] > 10):
+                if not (numpang[i] < 0 or numpang[i] > 10): #memastikan lantai penumpang valid
                     while ok == False:
                         print("Masukkan lantai tujuan penumpang ke-" + str(i + 1) + " [1-10]: ", end="")
                         minta[i] = int(input())
-                        if minta[i] == numpang[i]:
+                        if minta[i] == numpang[i]: #menghindari bug karena lantai awal dan tujuan sama
                             print("Mohon pilih lantai yang lain!")
                         elif not (minta[i] < 0 or minta[i] > 10):
-                            ok = True 
+                            ok = True #lanjut ke penumpang berikutnya, nanti ganti break
                         else:
                             print("Lantai tidak valid")
 
-        high = max(max(numpang), max(minta))
-        low = min(min(numpang), min(minta))
+        high = max(max(numpang), max(minta)) #lantai tertinggi lift
+        low = min(min(numpang), min(minta)) #dummy, belum jelas gunanya
 
-        while posisi_0 <= high:
+        while posisi_0 <= high: #elevator terus naik ke high
             print(posisi_0)
-            for i in range (0, n):
-                if posisi_0 == numpang[i] and dalam[i] == False:
+            for i in range (0, n): #setiap lantai cek lantai awal dan tujuan penumpang
+                if posisi_0 == numpang[i] and dalam[i] == False: #kalau ada penumpang di lantai ini, ambil
                     dalam[i] = True
                     print("Penumpang " + str(i+1) + " naik ke lift")
             
             for i in range (0, n):
-                if posisi_0 == minta[i] and dalam[i] == True:
+                if posisi_0 == minta[i] and dalam[i] == True: #kalau ada tujuan di lantai ini, keluarkan
                     numpang[i] = minta[i]
                     print("Penumpang " + str(i+1) + " turun dari lift")
             posisi_0 += 1
