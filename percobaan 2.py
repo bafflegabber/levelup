@@ -7,6 +7,7 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
     numpang = [0 for i in range (0, n)]
     minta = [0 for i in range (0, n)]
     dalam = [False for i in range (0, n)]
+    sudah = [False for i in range (0, n)]
     if not n == -1: #Selama pengguna tidak memasukkan -1, program berjalan
         for i in range (0, n):
             while True:
@@ -29,69 +30,48 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
         high = max(max(numpang), max(minta))
         low = min(min(numpang), min(minta))
 
-        if posisi_0 <= numpang[0]:
-            while posisi_0 <= high: #lift akan naik hanya sampai lantai penumpang/tujuan tertinggi
-                print(posisi_0)
-                for i in range (0, n):
-                    if posisi_0 == numpang[i] and dalam[i] == False:
-                        dalam[i] = True
-                        print("Penumpang " + str(i+1) + " naik ke lift")
+        while True:
+            print("[NAIK]")
+            print("Lantai " + str(posisi_0))
+            for i in range (0, n):
+                if numpang[i] == posisi_0 and not dalam[i] and not sudah[i]:
+                    dalam[i] = True
+                    print("Penumpang " + str(i+1) + " naik")
                 
-                for i in range (0, n):
-                    if posisi_0 == minta[i] and dalam[i] == True:
-                        dalam[i] = False
-                        numpang[i] = minta[i]
-                        print("Penumpang " + str(i+1) + " turun dari lift")
-                if not posisi_0 == high:
-                    posisi_0 += 1
-                else:
-                    break
+                if minta[i] == posisi_0 and dalam[i]:
+                    dalam[i] = False
+                    sudah[i] = True
+                    print("Penumpang " + str(i+1) + " turun")
             
-            if not low == numpang[0] or low == minta[0]:
-                while posisi_0 >= low:
-                    print(posisi_0)
-                    for i in range (0, n):
-                        if posisi_0 == numpang[i] and dalam[i] == False:
-                            dalam[i] = True
-                            print("Penumpang " + str(i+1) + " naik ke lift")
-                    
-                    for i in range (0, n):
-                        if posisi_0 == minta[i] and dalam[i] == True:
-                            dalam[i] = False
-                            print("Penumpang " + str(i+1) + " turun dari lift")
-                    posisi_0 -= 1
-        else:
-            while posisi_0 >= low:
-                print(posisi_0)
-                for i in range (0, n):
-                    if posisi_0 == numpang[i] and dalam[i] == False:
-                        dalam[i] = True
-                        print("Penumpang " + str(i+1) + " naik ke lift")
-                
-                for i in range (0, n):
-                    if posisi_0 == minta[i] and dalam[i] == True:
-                        dalam[i] = False
-                        print("Penumpang " + str(i+1) + " turun dari lift")
-                posisi_0 -= 1
-            
-            if not high == numpang[0] or high == minta[0]:
-                while posisi_0 <= high: #lift akan naik hanya sampai lantai penumpang/tujuan tertinggi
-                    print(posisi_0)
-                    for i in range (0, n):
-                        if posisi_0 == numpang[i] and dalam[i] == False:
-                            dalam[i] = True
-                            print("Penumpang " + str(i+1) + " naik ke lift")
-                    
-                    for i in range (0, n):
-                        if posisi_0 == minta[i] and dalam[i] == True:
-                            dalam[i] = False
-                            numpang[i] = minta[i]
-                            print("Penumpang " + str(i+1) + " turun dari lift")
-                    if not posisi_0 == high:
-                        posisi_0 += 1
-                    else:
-                        break
+            if not any(dalam) and not any(posisi_0 < i for i in numpang + minta if i > posisi_0):
+                break
 
+            if posisi_0 < high:
+                posisi_0 += 1
+            else:
+                break
+
+        while True:
+            print("[TURUN]")
+            print("Lantai " + str(posisi_0))
+            for i in range (0, n):
+                if numpang[i] == posisi_0 and not dalam[i] and not sudah[i]:
+                    dalam[i] = True
+                    print("Penumpang " + str(i+1) + " naik")
+                
+                if minta[i] == posisi_0 and dalam[i]:
+                    dalam[i] = False
+                    sudah[i] = True
+                    print("Penumpang " + str(i+1) + " turun")
+            
+            # Jika tidak ada penumpang lagi, keluar dari loop
+            if not any(dalam) and not any(posisi_0 > i for i in numpang + minta if i < posisi_0):
+                break
+            
+            if posisi_0 > low:
+                posisi_0 -= 1
+            else:
+                break
     else: #Saat pengguna memasukkan -1, break loop
-        break
         print("Keluar...")
+        break
