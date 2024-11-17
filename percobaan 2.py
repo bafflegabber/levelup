@@ -14,13 +14,13 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
             while True:
                 print("Masukkan posisi penumpang ke-" + str(i + 1) + " [1-10]: ", end="")
                 numpang[i] = int(input()) # Input lantai awal penumpang ke-i
-                if not (numpang[i] < 0 or numpang[i] > 10):
+                if not (numpang[i] <= 0 or numpang[i] > 10):
                     while True:
                         print("Masukkan lantai tujuan penumpang ke-" + str(i + 1) + " [1-10]: ", end="")
                         minta[i] = int(input()) # Input lantai tujuan penumpang ke-i
                         if minta[i] == numpang[i]:
                             print("Mohon pilih lantai yang lain!") # Lantai awal dan tujuan tidak boleh sama
-                        elif not (minta[i] < 0 or minta[i] > 10):
+                        elif not (minta[i] <= 0 or minta[i] > 10):
                             break
                         else:
                             print("Lantai tidak valid")
