@@ -45,7 +45,7 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
             if naik:
                 print("[NAIK]")
                 for lantai in range(posisi_0, high + 1):
-                    print(f"Lantai {lantai}")
+                    print("Lantai " + str(posisi_0))
                     posisi_0 = lantai
 
                     # Proses naik/turun penumpang
@@ -61,7 +61,7 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
             else:
                 print("[TURUN]")
                 for lantai in range(posisi_0, low - 1, -1):
-                    print(f"Lantai {lantai}")
+                    print("Lantai " + str(posisi_0))
                     posisi_0 = lantai
     
                     # Proses naik/turun penumpang
