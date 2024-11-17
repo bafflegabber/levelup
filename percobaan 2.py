@@ -52,11 +52,11 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
                     for i in range(0, n): # Cek setiap sampai satu lantai
                         if numpang[i] == lantai and not dalam[i] and not sudah[i]: # Cek penmpang yang mau naik
                             dalam[i] = True # Penumpang di lantai naik jika dan hanya jika penumpang di luar dan belum pernah naik
-                            print(f"Penumpang {i + 1} naik")
+                            print("Penumpang " + str(i+1) + " naik")
                         if minta[i] == lantai and dalam[i]: # Cek penumpang yang mau turun
                             dalam[i] = False
                             sudah[i] = True # Penumpang dinyatakan sudah pernah naik (mencegah bug agar tidak naik lagi)
-                            print(f"Penumpang {i + 1} turun")
+                            print("Penumpang " + str(i+1) + " turun")
                 naik = False  # Ganti arah setelah mencapai high
             else:
                 print("[TURUN]")
@@ -64,14 +64,15 @@ while True: #Selama tidak ada perintah berhenti, program akan berjalan
                     print(f"Lantai {lantai}")
                     posisi_0 = lantai
     
-                    for i in range(n): 
-                        if numpang[i] == lantai and not dalam[i] and not sudah[i]: 
-                            dalam[i] = True
-                            print(f"Penumpang {i + 1} naik")
-                        if minta[i] == lantai and dalam[i]: 
+                    # Proses naik/turun penumpang
+                    for i in range(0, n): # Cek setiap sampai satu lantai
+                        if numpang[i] == lantai and not dalam[i] and not sudah[i]: # Cek penmpang yang mau naik
+                            dalam[i] = True # Penumpang di lantai naik jika dan hanya jika penumpang di luar dan belum pernah naik
+                            print("Penumpang " + str(i+1) + " naik")
+                        if minta[i] == lantai and dalam[i]: # Cek penumpang yang mau turun
                             dalam[i] = False
-                            sudah[i] = True
-                            print(f"Penumpang {i + 1} turun")
+                            sudah[i] = True # Penumpang dinyatakan sudah pernah naik (mencegah bug agar tidak naik lagi)
+                            print("Penumpang " + str(i+1) + " turun")
                 naik = True  # Ganti arah setelah mencapai dasar
     else: #Saat pengguna memasukkan -1, break loop
         print("Keluar...")
